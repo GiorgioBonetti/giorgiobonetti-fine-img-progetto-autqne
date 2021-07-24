@@ -1,0 +1,22 @@
+<div class="inizio colore" *ngIf="isAutorizzato() else ciao">
+  <div class="row">
+    <div class="col-5 row" style="margin-left:1%; margin-top:2%">
+      <div style="margin-right:3%;"  *ngFor="let u of elencopiatti, index as i">
+        <img class="zoom" [src]="path + u.id + '.jpg'" width="200px" height="130px" (click)="selezionatoMetodo(i)">
+        <h5 style="margin-top:3%;">{{u.nome}}</h5>
+      </div>
+    </div>
+    <div class="col-7">
+      <app-un-piatto [piatto]="elencopiatti[selezionato]" [vedere]="true"></app-un-piatto>
+    </div>
+  </div>
+</div>
+<ng-template #ciao>
+  <div id="allertiamoci" class="alert alert-danger ">
+    <div id="centro">
+      <h2>❌ Accesso NON consentito al menù ❌</h2>
+      <h5> ❌PRIMA EFFETUARE IL LOGIN ❌</h5>
+      <button routerLink="/accesso" class="btn btn-danger">EFFETUA IL LOGIN</button>
+    </div>
+  </div>
+</ng-template>

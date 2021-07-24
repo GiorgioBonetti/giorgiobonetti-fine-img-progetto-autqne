@@ -1,0 +1,22 @@
+<div id="inizio" *ngIf="isAutorizzato() else ciao">
+  <div class="container">
+    <div class="row">
+      <p *ngFor="let a of ordini; index  as i">
+        <app-un-piatto (evento)="totale()" [piattoById]="a.id" [vedere]="false"></app-un-piatto>
+      </p>
+    </div>
+    <h3>
+      Totale: {{totaleSoldi}} €
+    </h3>
+  </div>
+</div>
+
+<ng-template #ciao>
+  <div id="allertiamoci" class="alert alert-danger " >
+    <div id="centro">
+      <h2 >❌ Accesso NON consentito all'ordine ❌</h2>
+      <h5> ❌PRIMA EFFETUARE IL LOGIN ❌</h5>
+      <button routerLink="/accesso" class="btn btn-danger">EFFETUA IL LOGIN</button>
+    </div>
+  </div>
+</ng-template>

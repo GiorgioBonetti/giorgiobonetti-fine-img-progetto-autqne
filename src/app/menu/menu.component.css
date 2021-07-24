@@ -1,0 +1,26 @@
+#allertiamoci {
+  margin-top: 5%;
+}
+
+.inizio {
+  margin-top: 30px;
+}
+
+#centro {
+  text-align: center;
+}
+
+.colore {
+  background-color: pink;
+}
+
+.zoom {
+  transition: transform 0.2s;
+}
+.zoom:hover {
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+

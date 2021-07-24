@@ -1,0 +1,21 @@
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <!-- <div class="col-md-4">
+      <img [src]="percorsoImmagine()" [alt]="mioLibro.titolo">
+    </div> -->
+    <div class="col-md-8">
+      <div class="card-body">
+        <img class="zoom" src = '{{path}}{{piatto.id}}.jpg' width="200px">
+        <h4 class="card-title">{{piatto.nome.toLocaleUpperCase()}}</h4>
+        <h6 class="card-text">PORTATA: {{piatto.portata.toLocaleUpperCase()}}</h6>
+        <h6 class="card-text">INGREDIENTI: {{piatto.ingredienti}}</h6>
+        <h6 class="card-text">PREZZO: {{piatto.prezzo}} € </h6>
+        <h6 class="card-text">INFO: {{piatto.nome_creatore}}</h6>
+        <button class="btn btn-success zoom2" *ngIf="vedere else ciao" (click)="addOrdine(piatto)"> AGGIUNGI A  ORDINE </button>
+        <ng-template #ciao>
+          <button class="btn btn-danger zoom2" (click)="rimuovi(piatto)"> RIMUOVI DA  ORDINE </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.sfondo {
+  margin-top: 1%;
+  margin-left: 1%;
+}
+
+.login {
+  margin-top: 1%;
+  margin-left: 20%;
+}
+.zoom {
+  transition: transform 0.2s;
+}
+.zoom:hover {
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}

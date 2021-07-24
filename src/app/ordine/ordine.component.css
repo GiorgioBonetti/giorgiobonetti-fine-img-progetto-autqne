@@ -1,0 +1,20 @@
+#allertiamoci{
+  margin-top: 5%;
+}
+
+#inizio{
+  margin-top: 30px;
+}
+
+#centro{
+  text-align: center;
+}
+
+.zoom2 {
+  transition: transform 0.2s;
+}
+.zoom2:hover {
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}

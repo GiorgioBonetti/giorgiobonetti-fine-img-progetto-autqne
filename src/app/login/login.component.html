@@ -1,0 +1,29 @@
+<div class="row sfondo ">
+  <img src= 'https://raw.githubusercontent.com/GiorgioBonetti/FotoCibi/main/CimaTosaHotel.jpg' class='col-5'>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body ">
+        <div class="login">
+          <h3>Menù Hotel Cima Tosa</h3>
+          <div class="row zoom">
+            <img src="https://raw.githubusercontent.com/GiorgioBonetti/FotoCibi/main/user1.png" width="50px">
+            <input type="text"
+                  [(ngModel)]="utente"
+                  class="form-control col-5 "
+                  placeholder="Username"
+                  [disabled]="isAutorizzato()">
+          </div>
+          <div class="row zoom">
+            <img src="https://raw.githubusercontent.com/GiorgioBonetti/FotoCibi/main/pwd.png" width="50px">
+            <input type="password"
+                [(ngModel)]="pwd"
+                class="form-control col-5"
+                placeholder="Password"
+                [disabled]="isAutorizzato()">
+          </div>
+          <button id="bottone" class="btn btn-danger col-6 zoom " (click)="autorizza()">{{testo}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

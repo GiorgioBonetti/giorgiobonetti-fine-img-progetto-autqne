@@ -1,60 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutenticazioneService } from '../common/autenticazione.service';
+import * as firebaseui from 'firebaseui';
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+import EmailAuthProvider = firebase.auth.EmailAuthProvider;
+import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import { Config } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  utente: string;
-  pwd: string;
-  log: boolean;
-  testo: string;
+export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor(private mioServizio: AutenticazioneService, private Nav: Router
-  ) {}
+  constructor(
+    private mioServizio: AutenticazioneService,
+    private afAuth: AngularFireAuth, 
+    private router: Router  ) {}
 
   ngOnInit() {
     if (this.isAutorizzato()) {
-      this.testo = 'ESCI';
-      this.utente = 'giorgio';
       this.pwd = '****';
     } else {
       this.testo = 'ACCEDI';
     }
-  }
 
-  autorizza() {
-    if (!this.isAutorizzato()) {
-      if (this.utente == 'giorgio' && this.pwd == 'vale') {
-        this.mioServizio.setAutorizza(true);
-        this.testo = 'ESCI';
-        alert(
-          '✅ Ciao ' +
-            this.utente.toLocaleUpperCase() +
-            ", hai effetuato l'accesso con successo ✅"
-        );
-        this.Nav.navigate(['menu']);
-      } else {
-        alert('⚠️ Attenzione username o password SBALGIATA ⚠️');
-        this.pwd = '';
-      }
-    } else {
-      this.mioServizio.setAutorizza(false);
-      this.testo = 'ACCEDI';
-      alert(
-        '❌⚠️✅ Ciao ' +
-          this.utente.toLocaleUpperCase() +
-          ", hai effetuato l'uscita con successo ✅⚠️❌"
-      );
-      this.utente = '';
-      this.pwd = '';
-    }
+    this.afAuth.app.then(app => {
+      const uiConfig: Config = {
+        signInOptions: [
+          EmailAuthProvider.PROVIDER_ID,
+          GoogleAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+          sigInSuccerWithAuthResult: this.onLoginSuccesfull.bind(this)
+        }
+      };
+      this.ui = new firebaseui.auth.AuthUI(app.auth());
+      this.ui.start('#firebaseui-auth-container', uiConfig);
+      this.ui.disableAutoSignIn();
+    });
+
+
   }
 
   isAutorizzato(): boolean {
     return this.mioServizio.getAutorizza();
+  }
+
+  ngOnDestroy() {
+    this.ui.delete();
+  }
+
+  onLoginSuccesfull(result) {
+    console.log('Firebase UI result:', result);
+    this.router.navigateByUrl('');
   }
 }
